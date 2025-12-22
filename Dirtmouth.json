@@ -1,0 +1,13 @@
+{
+    "id": "Dirtmouth",
+    "name": "Dirtmouth",
+    "author": ["adogwithyellow"],
+    "description": "A content-focused mod based on Hollow Knight by Team Cherry.",
+    "prefix": "HKMod",
+    "main_file": "Dirtmouth.lua",
+    "badge_colour": "4e5469",
+    "dependencies": [
+        "Steamodded (>=1.0.0~BETA-0827c)"
+    ],
+    "version": "1.0.0"
+}
