@@ -45,7 +45,7 @@ SMODS.Joker {
 	pos = {x = 2, y = 0},
 	cost = 30,
 	calculate = function(self, card, context)
-		if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
+		if context.end_of_round and context.main_eval and not context.game_over and not context.blueprint then
 			if G.GAME.blind.boss then
 				for i = 1, #G.jokers.cards do
 					if G.jokers.cards[i] == card then
@@ -104,7 +104,7 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = 'traitorlord',
-	config = {extra = {mult = 0, mult_gain = 3}},
+	config = {extra = {mult = 0, mult_gain = 3, destroyable = nil}},
 	rarity = 2,
 	atlas = 'HKJokers',
 	pos = {x = 0, y = 0},
@@ -113,17 +113,23 @@ SMODS.Joker {
 		return {vars = {card.ability.extra.mult, card.ability.extra.mult_gain}}
 	end,
 	calculate = function(self, card, context)
+		if context.before and context.main_eval and not context.blueprint then
+			card.ability.extra.destroyable = pseudorandom_element(G.play.cards, pseudoseed('traitor'))
+		end
 		if context.joker_main and card.ability.extra.mult > 0 then
 			return {
 				mult_mod = card.ability.extra.mult,
 				message = localize {type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}
 			}
 		end
-		if context.destroy_card and context.cardarea == G.play and not context.blueprint then
-			SMODS.destroy_cards(pseudorandom_element(G.play.cards, pseudoseed('traitor')))
-			return {
-				message = localize ('k_traitordestroy')
-			}
+		if context.destroy_card and not context.blueprint then
+			if context.destroy_card == card.ability.extra.destroyable then
+				card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
+				return {
+					message = localize ('k_traitordestroy'),
+					remove = true
+				}
+			end
 		end
 	end
 }
