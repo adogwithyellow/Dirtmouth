@@ -1,11 +1,11 @@
-SMODS.Atlas { --Joker sprites
+SMODS.Atlas {
 	key = "HKJokers",
 	path = "jokers.png",
 	px = 71,
 	py = 95
 }
 
-SMODS.Atlas { --Charm Joker Sprites
+SMODS.Atlas {
 	key = "HKCharms",
 	path = "charms.png",
 	px = 74,
@@ -21,7 +21,7 @@ SMODS.Rarity { --Dream Rarity (for Dream Nail)
     end
 }
 
-SMODS.Atlas { --Mod icon
+SMODS.Atlas {
     key = "modicon",
     path = "icon.png",
     px = 34,
@@ -29,4 +29,4 @@ SMODS.Atlas { --Mod icon
 }
 
 assert(SMODS.load_file("items/jokers.lua"))()
-assert(SMODS.load_file("items/charms.lua"))()	
+assert(SMODS.load_file("items/charms.lua"))()
