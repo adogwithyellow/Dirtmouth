@@ -30,9 +30,10 @@ return {
 			j_HKMod_nosk = {
 				name = 'Nosk',
 				text = {
-					"Copies ability of Joker to",
-					"the left, destroy copied Joker",
-					"when Boss Blind is defeated"
+					"Copies ability of Joker to the",
+					"left, destroy copied Joker after",
+					"#1# rounds and gain its ability",
+					"{C:inactive}(#2#/#1# rounds)"
 				}
 			},
 
@@ -86,6 +87,8 @@ return {
 	misc = {
 
 		dictionary = {
+			k_destroygeneric = "Destroyed!",
+			k_noskalmost = "Ready to strike...",
 			k_traitordestroy = "Slashed!",
 			
 			k_HKMod_DreamRare = "Dream"

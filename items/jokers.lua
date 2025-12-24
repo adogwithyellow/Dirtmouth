@@ -62,11 +62,14 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = 'nosk',
-	config = {},
+	config = {extra = {rounds = 2, timer = 0}},
 	rarity = 2,
 	atlas = 'HKJokers',
 	pos = {x = 0, y = 0},
 	cost = 6,
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.rounds, card.ability.extra.timer}}
+	end,
 	calculate = function(self, card, context)
 		local target = nil
 		local pos = nil
@@ -76,11 +79,48 @@ SMODS.Joker {
 				break
 			end
 		end
-		target = (pos and pos < 1) and G.jokers.cards[pos + 1] or nil
+		target = (pos and pos > 1) and G.jokers.cards[pos - 1] or nil
 
 		local change = SMODS.blueprint_effect(card, target, context)
 		if change then
 			SMODS.calculate_effect(change, card)
+		end
+
+		if context.end_of_round and context.main_eval and not context.game_over and not context.blueprint then
+			card.ability.extra.timer = card.ability.extra.timer + 1
+			if card.ability.extra.timer == card.ability.extra.rounds - 1 then
+				local eval = function(card) return not card.REMOVED end
+				juice_card_until(card, eval, true)
+				return {
+					message = localize('k_noskalmost')
+				}
+			end
+			if card.ability.extra.timer == card.ability.extra.rounds then
+				for i = 1, #G.jokers.cards do
+					if G.jokers.cards[i] == card then
+						pos = i
+						break
+					end
+				end
+				if pos and G.jokers.cards[pos - 1] and not SMODS.is_eternal(G.jokers.cards[pos - 1], card) and not G.jokers.cards[pos - 1].getting_sliced then
+					target = G.jokers.cards[pos - 1]
+					target.getting_sliced = true
+					G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							G.GAME.joker_buffer = 0
+							card:juice_up(0.8, 0.8)
+							target:start_dissolve({ HEX("4f556a") }, nil, 1.6)
+							play_sound('slice1', 0.96 + math.random() * 0.08)
+							return true
+						end
+					}))
+					card.ability.extra.timer = 0
+					return {
+						message = localize('k_destroygeneric')
+					}
+				end
+			end
 		end
 	end
 }
@@ -119,20 +159,25 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = 'wingednosk',
-	config = {extra = {chips = 5}},
+	config = {},
 	rarity = 'HKMod_DreamRare',
 	atlas = 'HKJokers',
 	pos = {x = 0, y = 0},
-	cost = 20,
-	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.extra.chips}}
-	end,
+	cost = 10,
 	calculate = function(self, card, context)
-		if context.joker_main then
-			return {
-				chip_mod = card.ability.extra.chips,
-				message = localize {type = 'variable', key = 'a_chips', vars = {card.ability.extra.chips}}
-			}
+		local target = nil
+		local pos = nil
+        for i = 1, #G.jokers.cards do
+            if G.jokers.cards[i] == card then
+                pos = i
+				break
+			end
+		end
+		target = (pos and pos > 1) and G.jokers.cards[pos - 1] or nil
+
+		local change = SMODS.blueprint_effect(card, target, context)
+		if change then
+			SMODS.calculate_effect(change, card)
 		end
 	end
 }
