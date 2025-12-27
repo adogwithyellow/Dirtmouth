@@ -22,19 +22,19 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = 'sly',
-	config = {extra = {Xmult_gain = 0.3, money = 9}},
+	config = {extra = {Xmult_gain = 0.3, dollars = 9}},
 	rarity = 3,
 	atlas = 'HKJokers',
 	pos = {x = 4, y = 0},
 	cost = 9,
 	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.extra.Xmult_gain, card.ability.extra.money, (1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.money))}}
+		return {vars = {card.ability.extra.Xmult_gain, card.ability.extra.dollars, (1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars))}}
 	end,
 	calculate = function(self, card, context)
-		if context.joker_main and to_number(math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.money)) >= 1 then
+		if context.joker_main and math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars) >= 1 then
         	return {
-				Xmult_mod = 1 + to_number(card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.money)),
-				message = localize {type = 'variable', key = 'a_Xmult', vars = {card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.money)}}
+				Xmult_mod = 1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars),
+				message = localize {type = 'variable', key = 'a_Xmult', vars = {1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars)}}
 			}
 		end
 	end
@@ -116,7 +116,7 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = 'nosk',
-	config = {extra = {rounds = 2, timer = 0}},
+	config = {extra = {rounds = 1, timer = 0}},
 	rarity = 2,
 	atlas = 'HKJokers',
 	pos = {x = 5, y = 0},
@@ -135,21 +135,21 @@ SMODS.Joker {
 		end
 		target = (pos and pos > 1) and G.jokers.cards[pos - 1] or nil
 
-		local change = SMODS.blueprint_effect(card, target, context)
-		if change then
-			SMODS.calculate_effect(change, card)
+		local ret = SMODS.blueprint_effect(card, target, context)
+		if ret then
+			SMODS.calculate_effect(ret, card)
 		end
 
 		if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
 			card.ability.extra.timer = card.ability.extra.timer + 1
-			if card.ability.extra.timer == card.ability.extra.rounds - 1 then
-				local eval = function(card) return card.ability.extra.timer == card.ability.extra.rounds - 1 and not G.RESET_JIGGLES end
+			if card.ability.extra.timer == card.ability.extra.rounds then
+				local eval = function(card) return card.ability.extra.timer == card.ability.extra.rounds and not G.RESET_JIGGLES end
 				juice_card_until(card, eval, true)
 				return {
 					message = localize('k_noskalmost')
 				}
 			end
-			if card.ability.extra.timer == card.ability.extra.rounds then
+			if card.ability.extra.timer == card.ability.extra.rounds + 1 then
 				for i = 1, #G.jokers.cards do
 					if G.jokers.cards[i] == card then
 						pos = i
@@ -181,11 +181,11 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = 'traitorlord',
-	config = {extra = {mult = 0, mult_gain = 3, destroyable = nil}},
+	config = {extra = {mult = 0, mult_gain = 5, destroyable = nil}},
 	rarity = 2,
 	atlas = 'HKJokers',
 	pos = {x = 0, y = 0},
-	cost = 6,
+	cost = 7,
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.mult, card.ability.extra.mult_gain}}
 	end,
@@ -217,7 +217,7 @@ SMODS.Joker {
 	rarity = 'HKMod_DreamRare',
 	atlas = 'HKJokers',
 	pos = {x = 5, y = 0},
-	cost = 10,
+	cost = 12,
 	calculate = function(self, card, context)
 		local target = nil
 		local pos = nil
@@ -229,13 +229,15 @@ SMODS.Joker {
 		end
 		target = (pos and pos > 1) and G.jokers.cards[pos - 1] or nil
 
-		local change = SMODS.blueprint_effect(card, target, context)
-		if change then
-			SMODS.calculate_effect(change, card)
+		local ret = SMODS.blueprint_effect(card, target, context)
+		if ret then
+			SMODS.calculate_effect(ret, card)
 		end
 	end
 }
 
+ --will not be the final effect obviously i just need to figure out what would be best
+ --void given form is the bridge between knight and void given focus which is why its still here
 SMODS.Joker {
 	key = 'voidform',
 	config = {extra = {mult = 40}},
@@ -267,12 +269,8 @@ SMODS.Joker {
 			if G.GAME.blind.boss then
 				for i = 1, #G.jokers.cards do
 					if G.jokers.cards[i] == card then
-						if i > 1 then
-							G.jokers.cards[i-1]:set_edition('e_negative')
-						end
-						if i < #G.jokers.cards then
-							G.jokers.cards[i+1]:set_edition('e_negative')
-						end
+						G.jokers.cards[i-1]:set_edition('e_negative')
+						G.jokers.cards[i+1]:set_edition('e_negative')
 					end
 				end
 			end
