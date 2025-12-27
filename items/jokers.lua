@@ -64,7 +64,7 @@ SMODS.Joker {
 	key = 'oro',
 	config = {extra = {mult = 0, mult_gain = 2}},
 	rarity = 1,
-	atlas = 'HKJokers',
+	atlas = 'placeholder',
 	pos = {x = 0, y = 0},
 	cost = 6,
 	loc_vars = function(self, info_queue, card)
@@ -91,7 +91,7 @@ SMODS.Joker {
 	key = 'mato',
 	config = {extra = {mult = 0, mult_gain = 2}},
 	rarity = 1,
-	atlas = 'HKJokers',
+	atlas = 'placeholder',
 	pos = {x = 0, y = 0},
 	cost = 6,
 	loc_vars = function(self, info_queue, card)
@@ -183,7 +183,7 @@ SMODS.Joker {
 	key = 'traitorlord',
 	config = {extra = {mult = 0, mult_gain = 5, destroyable = nil}},
 	rarity = 2,
-	atlas = 'HKJokers',
+	atlas = 'placeholder',
 	pos = {x = 0, y = 0},
 	cost = 7,
 	loc_vars = function(self, info_queue, card)
@@ -215,8 +215,8 @@ SMODS.Joker {
 	key = 'wingednosk',
 	config = {},
 	rarity = 'HKMod_DreamRare',
-	atlas = 'HKJokers',
-	pos = {x = 5, y = 0},
+	atlas = 'placeholder',
+	pos = {x = 0, y = 0},
 	cost = 12,
 	calculate = function(self, card, context)
 		local target = nil
