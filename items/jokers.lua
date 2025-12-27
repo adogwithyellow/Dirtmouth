@@ -74,12 +74,11 @@ SMODS.Joker {
 	if context.before and next(context.poker_hands['Straight']) then
 	card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
 		return {
-			message = 'Upgraded!',
-				colour = G.C.RED
+			message = localize('k_upgrade_ex')
 			}
 		end
 
-	if context.joker_main then
+	if context.joker_main and card.ability.extra.mult > 0 then
 		return {
 				mult_mod = card.ability.extra.mult,
 				message = localize {type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}
@@ -102,12 +101,11 @@ SMODS.Joker {
 	if context.before and next(context.poker_hands['Flush']) then
 	card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
 		return {
-			message = 'Upgraded!',
-				colour = G.C.RED
+			message = localize('k_upgrade_ex')
 			}
 		end
 
-	if context.joker_main then
+	if context.joker_main and card.ability.extra.mult > 0 then
 		return {
 				mult_mod = card.ability.extra.mult,
 				message = localize {type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}
@@ -121,7 +119,7 @@ SMODS.Joker {
 	config = {extra = {rounds = 2, timer = 0}},
 	rarity = 2,
 	atlas = 'HKJokers',
-	pos = {x = 0, y = 0},
+	pos = {x = 5, y = 0},
 	cost = 6,
 	loc_vars = function(self, info_queue, card)
 		return {vars = {card.ability.extra.rounds, card.ability.extra.timer}}
@@ -218,7 +216,7 @@ SMODS.Joker {
 	config = {},
 	rarity = 'HKMod_DreamRare',
 	atlas = 'HKJokers',
-	pos = {x = 0, y = 0},
+	pos = {x = 5, y = 0},
 	cost = 10,
 	calculate = function(self, card, context)
 		local target = nil

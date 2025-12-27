@@ -6,7 +6,7 @@ return {
 				name = 'Knight',
 				text = {
 				"{C:chips}+#1#{} Chips for every",
-				"Dirtmouth Joker in",
+				"{X:4E5469,C:white}Dirtmouth{} Joker in",
 				"your Joker slots"
 				}
 			},
@@ -32,7 +32,7 @@ return {
 				text = {
 					"This Joker gains",
 					" {C:mult}+#2#{} Mult if played hand",
-					"contains a Straight",
+					"contains a {C:attention}Straight",
 					"{C:inactive}(Currently {C:mult}+#1#{}{C:inactive} Mult)"
 				}
 			},
@@ -42,7 +42,7 @@ return {
 				text = {
 					"This Joker gains",
 					"{C:mult}+#2#{} Mult if played hand",
-					"contains a Flush",
+					"contains a {C:attention}Flush",
 					"{C:inactive}(Currently {C:mult}+#1#{}{C:inactive} Mult)"
 				}
 			},
