@@ -2,7 +2,7 @@
     "id": "Dirtmouth",
     "name": "Dirtmouth",
     "author": ["adogwithyellow"],
-    "description": "A content-focused mod based on Hollow Knight by Team Cherry.",
+    "description": "A content-focused Balatro mod based on Team Cherry's Hollow Knight.",
     "prefix": "HKMod",
     "main_file": "Dirtmouth.lua",
     "badge_colour": "4e5469",

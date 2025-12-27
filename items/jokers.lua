@@ -20,7 +20,7 @@ SMODS.Joker {
 	end
 }
 
-SMODS.Joker {
+SMODS.Joker { --TODO: fix xmult message
 	key = 'sly',
 	config = {extra = {Xmult_gain = 0.3, dollars = 9}},
 	rarity = 3,
@@ -114,7 +114,7 @@ SMODS.Joker {
 	end
 }
 
-SMODS.Joker {
+SMODS.Joker { --TODO: fix juice
 	key = 'nosk',
 	config = {extra = {rounds = 1, timer = 0}},
 	rarity = 2,
@@ -236,8 +236,8 @@ SMODS.Joker {
 	end
 }
 
- --will not be the final effect obviously i just need to figure out what would be best
- --void given form is the bridge between knight and void given focus which is why its still here
+ --TODO: will not be the final effect obviously i just need to figure out what would be best
+ --form is the bridge between knight and focus which is why its still here
 SMODS.Joker {
 	key = 'voidform',
 	config = {extra = {mult = 40}},
@@ -265,12 +265,20 @@ SMODS.Joker {
 	pos = {x = 2, y = 0},
 	cost = 30,
 	calculate = function(self, card, context)
+		local pos = nil
+        for i = 1, #G.jokers.cards do
+            if G.jokers.cards[i] == card then
+                pos = i
+				break
+			end
+		end
+
 		if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
 			if G.GAME.blind.boss then
 				for i = 1, #G.jokers.cards do
 					if G.jokers.cards[i] == card then
-						G.jokers.cards[i-1]:set_edition('e_negative')
-						G.jokers.cards[i+1]:set_edition('e_negative')
+						G.jokers.cards[pos - 1]:set_edition('e_negative')
+						G.jokers.cards[pos + 1]:set_edition('e_negative')
 					end
 				end
 			end

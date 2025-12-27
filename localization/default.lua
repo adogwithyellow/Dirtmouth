@@ -52,8 +52,8 @@ return {
 				text = {
 					"Copies ability of Joker to the",
 					"left, destroy copied Joker after",
-					"#1# rounds and gain its ability",
-					"{C:inactive}(#2#/#1# rounds)"
+					"#1# round and gain its ability",
+					"{C:inactive}(#2#/#1# round)"
 				}
 			},
 
@@ -104,7 +104,7 @@ return {
 
 	},
 
-	misc = {
+	misc = { --TODO: fix "Dream" rarity display
 
 		dictionary = {
 			k_destroygeneric = "Destroyed!",
@@ -115,7 +115,7 @@ return {
 		},
 
 		labels = {
-			k_HKMod_DreamRare = "Dream"
+			HKMod_DreamRare = "Dream"
 		}
 
 	}
