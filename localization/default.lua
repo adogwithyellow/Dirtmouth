@@ -27,6 +27,26 @@ return {
 				}
 			},
 
+			j_HKMod_oro = {
+				name = 'Nailmaster Oro',
+				text = {
+					"This Joker gains",
+					" {C:mult}+#2#{} Mult if played hand",
+					"contains a Straight",
+					"{C:inactive}(Currently {C:mult}+#1#{}{C:inactive} Mult)"
+				}
+			},
+
+			j_HKMod_mato = {
+				name = 'Nailmaster Mato',
+				text = {
+					"This Joker gains",
+					"{C:mult}+#2#{} Mult if played hand",
+					"contains a Flush",
+					"{C:inactive}(Currently {C:mult}+#1#{}{C:inactive} Mult)"
+				}
+			},
+
 			j_HKMod_nosk = {
 				name = 'Nosk',
 				text = {

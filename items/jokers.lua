@@ -61,6 +61,62 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
+	key = 'oro',
+	config = {extra = {mult = 0, mult_gain = 2}},
+	rarity = 1,
+	atlas = 'HKJokers',
+	pos = {x = 0, y = 0},
+	cost = 6,
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.mult, card.ability.extra.mult_gain}}
+	end,
+	calculate = function(self, card, context)
+	if context.before and next(context.poker_hands['Straight']) then
+	card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
+		return {
+			message = 'Upgraded!',
+				colour = G.C.RED
+			}
+		end
+
+	if context.joker_main then
+		return {
+				mult_mod = card.ability.extra.mult,
+				message = localize {type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}
+			}
+		end
+	end
+}
+
+SMODS.Joker {
+	key = 'mato',
+	config = {extra = {mult = 0, mult_gain = 2}},
+	rarity = 1,
+	atlas = 'HKJokers',
+	pos = {x = 0, y = 0},
+	cost = 6,
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.mult, card.ability.extra.mult_gain}}
+	end,
+	calculate = function(self, card, context)
+	if context.before and next(context.poker_hands['Flush']) then
+	card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain
+		return {
+			message = 'Upgraded!',
+				colour = G.C.RED
+			}
+		end
+
+	if context.joker_main then
+		return {
+				mult_mod = card.ability.extra.mult,
+				message = localize {type = 'variable', key = 'a_mult', vars = {card.ability.extra.mult}}
+			}
+		end
+	end
+}
+
+SMODS.Joker {
 	key = 'nosk',
 	config = {extra = {rounds = 2, timer = 0}},
 	rarity = 2,
@@ -86,10 +142,10 @@ SMODS.Joker {
 			SMODS.calculate_effect(change, card)
 		end
 
-		if context.end_of_round and context.main_eval and not context.game_over and not context.blueprint then
+		if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
 			card.ability.extra.timer = card.ability.extra.timer + 1
 			if card.ability.extra.timer == card.ability.extra.rounds - 1 then
-				local eval = function(card) return not card.REMOVED end
+				local eval = function(card) return card.ability.extra.timer == card.ability.extra.rounds - 1 and not G.RESET_JIGGLES end
 				juice_card_until(card, eval, true)
 				return {
 					message = localize('k_noskalmost')
@@ -209,7 +265,7 @@ SMODS.Joker {
 	pos = {x = 2, y = 0},
 	cost = 30,
 	calculate = function(self, card, context)
-		if context.end_of_round and context.main_eval and not context.game_over and not context.blueprint then
+		if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
 			if G.GAME.blind.boss then
 				for i = 1, #G.jokers.cards do
 					if G.jokers.cards[i] == card then
