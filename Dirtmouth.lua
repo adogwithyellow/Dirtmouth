@@ -1,4 +1,4 @@
-SMODS.Atlas {
+SMODS.Atlas { --TODO: maybe figure out custom negative textures for some jokers? mainly for form and focus
 	key = "HKJokers",
 	path = "jokers.png",
 	px = 71,
@@ -19,7 +19,7 @@ SMODS.Atlas {
 	py = 74
 }
 
-SMODS.Rarity { --Dream Rarity (for Dream Nail)
+SMODS.Rarity {
     key = "DreamRare",
     badge_colour = HEX("E8B8E5"),
     default_weight = 0,
