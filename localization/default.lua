@@ -7,7 +7,8 @@ return {
 				text = {
 				"{C:chips}+#1#{} Chips for every",
 				"{X:4E5469,C:white}Dirtmouth{} Joker in",
-				"your Joker slots"
+				"your Joker slots",
+				"{C:inactive}(Currently {C:chips}+#2#{}{C:inactive} Chips)"
 				}
 			},
 

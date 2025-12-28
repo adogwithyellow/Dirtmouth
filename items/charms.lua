@@ -1,7 +1,6 @@
 SMODS.Joker {
 	key = 'unbreakstrength',
-	config = {extra = {Xmult = 4}},
-	pixel_size = {w = 72, h = 72},
+	config = {extra = {Xmult = 3}},
 	rarity = 4,
 	atlas = 'HKCharms',
 	pos = {x = 0, y = 0},

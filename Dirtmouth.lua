@@ -12,12 +12,12 @@ SMODS.Atlas {
 	py = 95
 }
 
-SMODS.Atlas {
-	key = "HKCharms",
-	path = "charms.png",
-	px = 74,
-	py = 74
-}
+--SMODS.Atlas {
+--	key = "HKCharms",
+--	path = "charms.png",
+--	px = 72,
+--	py = 72
+--}
 
 SMODS.Rarity {
     key = "DreamRare",
@@ -36,4 +36,4 @@ SMODS.Atlas {
 }
 
 assert(SMODS.load_file("items/jokers.lua"))()
-assert(SMODS.load_file("items/charms.lua"))()
+--assert(SMODS.load_file("items/charms.lua"))()
