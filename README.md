@@ -6,7 +6,8 @@ Incredibly incomplete and WIP right now, almost no art and mechanics are done, o
 Current plans:  
   
 A ton of Jokers  
-Some new Consumables  
+Some new Consumables
+New Boss Blinds    
 Custom Decks (one with a unique mechanic)  
 Custom Challenges  
 Joker upgrade mechanic (mod-specific Jokers only)  

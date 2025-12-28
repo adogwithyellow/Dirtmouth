@@ -109,6 +109,7 @@ return {
 
 		dictionary = {
 			k_destroygeneric = "Destroyed!",
+			k_inactive_ex = "Inactive",
 			k_noskalmost = "Ready to strike...",
 			k_traitordestroy = "Slashed!",
 			

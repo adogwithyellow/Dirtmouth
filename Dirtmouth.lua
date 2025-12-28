@@ -25,7 +25,10 @@ SMODS.Rarity {
     default_weight = 0,
     get_weight = function(self, weight, object_type)
         return weight
-    end
+    end,
+    loc_txt = {
+        name = "Dream"
+    }
 }
 
 SMODS.Atlas {

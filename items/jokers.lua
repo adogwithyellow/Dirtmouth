@@ -2,7 +2,7 @@
 
 SMODS.Joker {
 	key = 'knight',
-	config = {extra = {chips = 25}},
+	config = {extra = {chips = 20}},
 	rarity = 1,
 	atlas = 'HKJokers',
 	pos = {x = 0, y = 0},
@@ -164,7 +164,7 @@ SMODS.Joker { --TODO: fix juice
 						func = function()
 							G.GAME.joker_buffer = 0
 							card:juice_up(0.8, 0.8)
-							target:start_dissolve({ HEX("4f556a") }, nil, 1.6)
+							target:start_dissolve({HEX("4f556a")}, nil, 1.6)
 							play_sound('slice1', 0.96 + math.random() * 0.08)
 							return true
 						end
@@ -174,6 +174,7 @@ SMODS.Joker { --TODO: fix juice
 						message = localize('k_destroygeneric')
 					}
 				end
+				card.ability.extra.timer = 0
 			end
 		end
 	end
