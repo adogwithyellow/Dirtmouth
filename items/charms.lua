@@ -2,6 +2,7 @@ SMODS.Joker {
 	key = 'unbreakstrength',
 	config = {extra = {Xmult = 3}},
 	rarity = 4,
+	pools = {["HKJokersCharms"] = true},
 	atlas = 'HKCharms',
 	pos = {x = 0, y = 0},
 	cost = 25,

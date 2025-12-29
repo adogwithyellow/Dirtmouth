@@ -40,3 +40,4 @@ SMODS.Atlas {
 
 assert(SMODS.load_file("items/jokers.lua"))()
 --assert(SMODS.load_file("items/charms.lua"))()
+assert(SMODS.load_file("items/pools.lua"))()

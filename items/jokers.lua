@@ -4,6 +4,7 @@ SMODS.Joker {
 	key = 'knight',
 	config = {extra = {chips = 20}},
 	rarity = 1,
+	pools = {["HKJokersGeneric"] = true},
 	atlas = 'HKJokers',
 	pos = {x = 0, y = 0},
 	cost = 3,
@@ -20,30 +21,11 @@ SMODS.Joker {
 	end
 }
 
-SMODS.Joker { --TODO: fix xmult message
-	key = 'sly',
-	config = {extra = {Xmult_gain = 0.3, dollars = 9}},
-	rarity = 3,
-	atlas = 'HKJokers',
-	pos = {x = 4, y = 0},
-	cost = 9,
-	loc_vars = function(self, info_queue, card)
-		return {vars = {card.ability.extra.Xmult_gain, card.ability.extra.dollars, (1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars))}}
-	end,
-	calculate = function(self, card, context)
-		if context.joker_main and math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars) >= 1 then
-        	return {
-				Xmult_mod = 1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars),
-				message = localize {type = 'variable', key = 'a_Xmult', vars = {1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars)}}
-			}
-		end
-	end
-}
-
 SMODS.Joker {
 	key = 'zote',
 	config = {extra = {chips = 5}},
 	rarity = 1,
+	pools = {["HKJokersGeneric"] = true},
 	atlas = 'HKJokers',
 	pos = {x = 3, y = 0},
 	cost = 1,
@@ -64,6 +46,7 @@ SMODS.Joker {
 	key = 'oro',
 	config = {extra = {mult = 0, mult_gain = 2}},
 	rarity = 1,
+	pools = {["HKJokersGeneric"] = true},
 	atlas = 'placeholder',
 	pos = {x = 0, y = 0},
 	cost = 6,
@@ -91,6 +74,7 @@ SMODS.Joker {
 	key = 'mato',
 	config = {extra = {mult = 0, mult_gain = 2}},
 	rarity = 1,
+	pools = {["HKJokersGeneric"] = true},
 	atlas = 'placeholder',
 	pos = {x = 0, y = 0},
 	cost = 6,
@@ -114,10 +98,32 @@ SMODS.Joker {
 	end
 }
 
+SMODS.Joker { --TODO: fix xmult message
+	key = 'sly',
+	config = {extra = {Xmult_gain = 0.3, dollars = 9}},
+	rarity = 3,
+	pools = {["HKJokersGeneric"] = true},
+	atlas = 'HKJokers',
+	pos = {x = 4, y = 0},
+	cost = 9,
+	loc_vars = function(self, info_queue, card)
+		return {vars = {card.ability.extra.Xmult_gain, card.ability.extra.dollars, (1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars))}}
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main and math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars) >= 1 then
+        	return {
+				Xmult_mod = 1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars),
+				message = localize {type = 'variable', key = 'a_Xmult', vars = {1 + card.ability.extra.Xmult_gain * math.floor((G.GAME.dollars + (G.GAME.dollar_buffer or 0)) / card.ability.extra.dollars)}}
+			}
+		end
+	end
+}
+
 SMODS.Joker { --TODO: fix juice
 	key = 'nosk',
 	config = {extra = {rounds = 1, timer = 0}},
 	rarity = 2,
+	pools = {["HKJokersGeneric"] = true},
 	atlas = 'HKJokers',
 	pos = {x = 5, y = 0},
 	cost = 6,
@@ -184,6 +190,7 @@ SMODS.Joker {
 	key = 'traitorlord',
 	config = {extra = {mult = 0, mult_gain = 5, destroyable = nil}},
 	rarity = 2,
+	pools = {["HKJokersGeneric"] = true},
 	atlas = 'placeholder',
 	pos = {x = 0, y = 0},
 	cost = 7,
@@ -216,6 +223,7 @@ SMODS.Joker {
 	key = 'wingednosk',
 	config = {},
 	rarity = 'HKMod_DreamRare',
+	pools = {["HKJokersDream"] = true},
 	atlas = 'placeholder',
 	pos = {x = 0, y = 0},
 	cost = 12,
@@ -243,6 +251,7 @@ SMODS.Joker {
 	key = 'voidform',
 	config = {extra = {mult = 40}},
 	rarity = 'HKMod_DreamRare',
+	pools = {["HKJokersDream"] = true},
 	atlas = 'HKJokers',
 	pos = {x = 1, y = 0},
 	cost = 20,
@@ -262,6 +271,7 @@ SMODS.Joker {
 SMODS.Joker {
 	key = 'voidfocus',
 	rarity = 'HKMod_DreamRare',
+	pools = {["HKJokersDream"] = true},
 	atlas = 'HKJokers',
 	pos = {x = 2, y = 0},
 	cost = 30,
